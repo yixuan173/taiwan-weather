@@ -1,0 +1,682 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* 1rem = 10px，原預設font-size = 16px，手動跟改為16px * 62.5% = 10px */
+  font-size: 62.5%;
+
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  line-height: 1;
+  font-weight: 300;
+  color: #555;
+
+  overflow-x: hidden;
+}
+
+/************************************************/
+/************* Scrollbar ***********************/
+/************************************************/
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fafafa;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #74c0fc;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #339af0;
+}
+
+/************************************************/
+/**************** NAV BAR ***********************/
+/************************************************/
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: rgba(255, 255, 255, 0.9);
+  height: 9.6rem;
+  padding: 0 4.8rem;
+
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.logo {
+  height: 7rem;
+}
+
+.nav-bar {
+  height: 100%;
+  padding-right: 2.4rem;
+}
+
+.nav-list {
+  height: 100%;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 4.8rem;
+}
+
+.first-li {
+  height: 100%;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s;
+}
+
+.first-li::after {
+  content: "";
+  display: block;
+  width: 0%;
+  height: 3px;
+  background-color: #228be6;
+
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  transition: all 0.275s;
+}
+
+.first-li:hover::after {
+  width: 130%;
+  /* box-shadow: inset 0 -3px 0 #228be6; */
+  /* border-bottom: 3px solid #228be6; */
+}
+
+.nav-link:link,
+.nav-link:visited {
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 1.8rem;
+
+  display: flex;
+  align-items: center;
+
+  transition: all 0.3s;
+}
+
+.first-li:hover > .nav-link,
+.first-li:hover > .nav-link > .nav-icon,
+.nav-link:active {
+  color: #228be6;
+}
+
+.nav-icon {
+  color: #333;
+  margin-left: 0.5rem;
+
+  transition: all 0.3s;
+}
+
+.second-list {
+  list-style: none;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 0.8rem 1.6rem;
+  z-index: 998;
+  left: -20%;
+  top: 130%;
+  min-width: 20rem;
+
+  opacity: 0;
+  transition: all 0.4s;
+
+  visibility: hidden;
+}
+
+.second-list li {
+  margin: 1.6rem 0;
+}
+
+.nav-link.second-link {
+  color: #666;
+}
+
+.second-link:hover {
+  color: #4ea2eb;
+  transform: translate(10%, 0);
+}
+
+.first-li:hover > .second-list {
+  /* 滑鼠滑入展開次選單*/
+  top: 100%;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* MOBILE */
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 30px;
+
+  display: none;
+}
+
+.nav-btn span,
+.nav-btn span:after,
+.nav-btn span:before {
+  width: 100%;
+  height: 5px;
+  background-color: #555;
+  transition: all 0.3s;
+  border-radius: 2px;
+}
+
+.nav-btn span:after,
+.nav-btn span:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -9px;
+}
+
+.nav-btn span:after {
+  top: 9px;
+}
+
+.nav-btn span {
+  position: relative;
+  display: block;
+}
+
+/************************************************/
+/*************** MAIN SECTION *******************/
+/************************************************/
+
+.main-section {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(255, 255, 255, 0.6),
+      rgba(255, 255, 255, 0.4)
+    ),
+    url(../img/background01.webp);
+  /* height: 90vh; */
+
+  object-fit: cover;
+}
+
+.grid--2-cols {
+  display: grid;
+  column-gap: 3.2rem;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 12.1rem 22rem 19.2rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4.8rem 3.6rem;
+}
+
+.weather-background {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+
+  transition: all 0.3s;
+}
+
+.weather-background:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.today-weather-container {
+  padding: 1.8rem 2.4rem;
+  grid-row: 1 / 3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.today-weather-header {
+  width: 100%;
+  margin: 1.6rem 0 3.2rem;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.today-icon {
+  display: inline-block;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  transform: translate(15%, 0);
+}
+
+.today-header-text {
+  padding-top: 1.2rem;
+  margin-left: 50%;
+}
+
+.day-text {
+  font-size: 1.8rem;
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.time-text {
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.second-title {
+  color: #444;
+  font-size: 9.6rem;
+  font-weight: 600;
+
+  margin: 1.2rem 0 0;
+}
+
+.city-name {
+  font-size: 3.2rem;
+  font-weight: 500;
+  color: #222;
+  margin: 1.2rem 0 1.6rem;
+
+  letter-spacing: 0.75px;
+}
+
+.description-weather {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #555;
+  letter-spacing: 1.5px;
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+}
+
+/************************************************/
+/*********** SEARCH & HOUR BARAnimation *********/
+/************************************************/
+
+.search-bar {
+  margin: 4.8rem 1.2rem;
+  align-self: center;
+}
+
+.search-form {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.search-input {
+  border: none;
+  border-bottom: 3px solid #fafafa;
+  color: #fafafa;
+  width: 80%;
+  font-size: 2.4rem;
+  font-weight: 600;
+  padding: 1.2rem 2.4rem;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.search-input:focus {
+  outline: none;
+  border-bottom: 3px solid #555;
+}
+
+.search-input::placeholder {
+  color: #fafafa;
+}
+
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 100%;
+  border: none;
+  padding: 1.2rem 1.2rem;
+  cursor: pointer;
+  background-color: rgba(250, 250, 250, 0.7);
+
+  transition: all 0.3s;
+}
+
+.search-btn:hover {
+  background-color: rgba(250, 250, 250, 0.95);
+}
+
+.search-icon {
+  width: 2.4rem;
+}
+
+.hour-weather-container {
+  position: relative;
+
+  grid-column: 2 / -1;
+}
+
+.title-third {
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-shadow: 3px 3px 3px rgba(85, 85, 85, 0.5);
+
+  color: #fff;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(0, -75%);
+}
+
+.hour-weather-list {
+  padding: 2.4rem 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.hour-day-text {
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.hour-time-text {
+  font-size: 1.2rem;
+  font-weight: 400;
+
+  padding-bottom: 1.2rem;
+}
+
+.hour-temp-text {
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  color: #333;
+}
+
+.hour-rain-text {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #444;
+
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.rain-icon {
+  font-size: 1.4rem;
+}
+
+/************************************************/
+/************* WEEK WEATHER BAR *****************/
+/************************************************/
+
+.week-weather-container {
+  margin-top: 3.2rem;
+  position: relative;
+  grid-column: 1 / -1;
+}
+
+.weather-background-none {
+  color: #fff;
+
+  transition: all 0.3s;
+}
+
+.weather-background-none:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  border: none;
+  border-radius: 10px;
+  color: #333;
+}
+
+.week-weather-list {
+  padding: 2.4rem 0;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.hour-weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  gap: 0.8rem;
+}
+
+.week-day-text {
+  font-size: 1.6rem;
+  font-weight: 400;
+
+  padding-bottom: 1.2rem;
+}
+
+.img-container {
+  width: 100%;
+  height: 50px;
+  position: relative;
+}
+
+.img-day {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  transform: translate(-5%, 0);
+}
+.img-night {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  transform: translate(5%, 0);
+}
+
+.temp-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.slash {
+  font-size: 2.4rem;
+  font-weight: 500;
+
+  margin-right: 0.4rem;
+}
+
+.week-temp-text {
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+}
+
+/************************************************/
+/************* SECOND SECTION *******************/
+/************************************************/
+
+.second-section {
+  margin-top: 9.8rem;
+
+  background-image: linear-gradient(
+    to top,
+    #aedcff 0%,
+    #dbefff 40%,
+    #edf7ff 60%,
+    #f6fbff 80%,
+    #ffffff 100%
+  );
+}
+
+.grid--2-rows {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 9.8rem;
+  row-gap: 9.8rem;
+}
+
+.title {
+  font-size: 4.8rem;
+  font-weight: 700;
+  text-align: center;
+
+  margin-bottom: 6.4rem;
+}
+
+.area-container {
+  position: relative;
+}
+
+.area {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1.6rem;
+  padding: 3.2rem 0;
+}
+
+.area-part {
+  font-size: 3.6rem;
+  font-weight: 500;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(0, -100%);
+}
+
+.area-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  transition: all 0.3s;
+}
+
+.area-list:hover {
+  transform: scale(1.15);
+}
+
+.area-city-name {
+  font-size: 2.4rem;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+}
+
+.area-temp-text {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.temp-icon {
+  font-size: 2rem;
+}
+
+.hot {
+  font-size: 2.2rem;
+  color: #e03131;
+}
+
+.cold {
+  font-size: 2.2rem;
+  color: #1971c2;
+}
+
+/************************************************/
+/***************** ERROR PART *******************/
+/************************************************/
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+.error-icon {
+  padding-top: 0.8rem;
+  width: 4.8rem;
+
+  stroke: #e03131;
+}
+.error-msg {
+  font-size: 2.8rem;
+  font-weight: 600;
+
+  color: #222;
+}
+
+/************************************************/
+/******************* SPINNER ********************/
+/************************************************/
+
+.spinner {
+  margin: 5rem auto;
+  text-align: center;
+}
+
+.spinner-icon {
+  height: 8rem;
+  width: 8rem;
+  color: #ffe066;
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

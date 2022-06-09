@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>臺灣天氣即時報 | 不怕變天才知道</title>
+    <meta
+      name="description"
+      content="結合中央氣象局API的一個簡易即時天氣預報網站，可供查詢臺灣各地氣候。"
+    />
+    <meta name="author" content="yixuan173" />
+    <link
+      rel="icon"
+      href="https://img.icons8.com/external-justicon-lineal-color-justicon/64/000000/external-sun-weather-justicon-lineal-color-justicon-2.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/queries.css" />
+    <script type="module" defer src="./js/controller.js"></script>
+  </head>
+
+  <body>
+    <!-- 標頭 -->
+    <header class="header">
+      <a class="logo-container" href="#"
+        ><img class="logo" src="./img/logo-1.webp" />
+      </a>
+
+      <nav class="nav-bar">
+        <ul class="nav-list">
+          <li class="first-li"><a class="nav-link" href="#">最新消息</a></li>
+          <li class="first-li"><a class="nav-link" href="#">紫外線預報</a></li>
+          <li class="first-li two">
+            <a class="nav-link" href="#"
+              >目前天氣觀測<ion-icon
+                class="nav-icon"
+                name="caret-down-outline"
+              ></ion-icon
+            ></a>
+            <ul class="second-list">
+              <li>
+                <a class="nav-link second-link" href="#second-section"
+                  >最新天氣</a
+                >
+              </li>
+              <li><a class="nav-link second-link" href="#">縣市測站列表</a></li>
+              <li><a class="nav-link second-link" href="#">天氣排行榜</a></li>
+            </ul>
+          </li>
+          <li class="first-li two">
+            <a class="nav-link" href="#"
+              >雨量觀測<ion-icon
+                class="nav-icon"
+                name="caret-down-outline"
+              ></ion-icon
+            ></a>
+            <ul class="second-list">
+              <li><a class="nav-link second-link" href="#">日累積圖</a></li>
+              <li><a class="nav-link second-link" href="#">小時累積圖</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+
+      <a href="#" class="nav-btn"><span></span></a>
+      <!-- <button class="btn-mobile-nav">
+        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+      </button> -->
+    </header>
+
+    <!-- 主要內容 -->
+    <main class="main">
+      <section class="main-section">
+        <div class="container grid--2-cols">
+          <div class="today-weather-container weather-background">
+            <!-- <div class="today-weather-header">
+              <img
+                class="today-icon"
+                src="https://img.icons8.com/cotton/160/000000/sun--v2.png"
+              />
+              <div class="today-header-text">
+                <p class="day-text">
+                  05/04 <span class="time-text">12:00 ~ 18:00</span>
+                </p>
+                <h2 class="second-title">25&deg;C</h2>
+              </div>
+            </div>
+
+            <p class="city-name">高雄市</p>
+            <p class="description-weather">
+              高雄市今(04)日平地(苓雅)為多雲，氣溫24 ~
+              29度，降雨機率20%；丘陵區(旗山)多雲，氣溫22 ~
+              31度，降雨機率20%；山區（六龜）多雲，氣溫20 ~ 30度，降雨機率20%。
+            </p> -->
+          </div>
+          <div class="search-bar">
+            <form class="search-form">
+              <input type="text" class="search-input" placeholder="Search..." />
+              <button class="search-btn">
+                <img
+                  src="https://img.icons8.com/pastel-glyph/28/000000/search--v2.png"
+                />
+                <!-- <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="search-icon"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg> -->
+              </button>
+            </form>
+          </div>
+          <div class="hour-weather-container weather-background">
+            <h3 class="title-third">36小時天氣預報</h3>
+            <div class="hour-weather-list">
+              <!-- <div class="hour-weather">
+                <p class="hour-day-text">05/04</p>
+                <p class="hour-time-text">12:00 ~ 00:00</p>
+                <img
+                  src="https://img.icons8.com/cotton/64/000000/sun--v2.png"
+                />
+                <p class="hour-temp-text">15&deg;C</p>
+                <p class="hour-rain-text">6%</p>
+              </div>
+              <div class="hour-weather">
+                <p class="hour-day-text">05/05</p>
+                <p class="hour-time-text">00:00 ~ 12:00</p>
+                <img
+                  src="https://img.icons8.com/cotton/64/000000/partly-cloudy-day--v3.png"
+                />
+                <p class="hour-temp-text">15&deg;C</p>
+                <p class="hour-rain-text">6%</p>
+              </div>
+              <div class="hour-weather">
+                <p class="hour-day-text">05/05</p>
+                <p class="hour-time-text">12:00 ~ 00:00</p>
+                <img
+                  src="https://img.icons8.com/cotton/64/000000/sun--v2.png"
+                />
+                <p class="hour-temp-text">15&deg;C</p>
+                <p class="hour-rain-text">6%</p>
+              </div> -->
+            </div>
+          </div>
+          <div class="week-weather-container weather-background-none">
+            <h3 class="title-third">一週天氣預報</h3>
+            <div class="week-weather-list">
+              <!-- <div class="hour-weather">
+              <p class="week-day-text">05/04</p>
+              <div class="img-container">
+                <img
+                  class="img-day"
+                  src="https://img.icons8.com/cotton/36/000000/windy-weather.png"
+                />
+                <img
+                  class="img-night"
+                  src="https://img.icons8.com/cotton/36/000000/windy-weather.png"
+                />
+              </div>
+              <div class="temp-container">
+                <span class="week-temp-text temp-day">16&deg;</span>
+                <span class="slash">/</span>
+                <span class="week-temp-text temp-night">16&deg;</span>
+              </div>
+            </div> -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="second-section" id="second-section">
+        <h2 class="title">各地氣溫</h2>
+        <div class="container grid--2-rows">
+          <div class="area-container">
+            <h3 class="area-part">北部</h3>
+            <div class="area north-area">
+              <!-- <div class="area-list">
+                <span class="area-city-name">基隆市</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">臺北市</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">新北市</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">桃園市</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">新竹市</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">新竹縣</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">苗栗縣</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div> -->
+            </div>
+          </div>
+
+          <div class="area-container">
+            <h3 class="area-part">中部</h3>
+            <div class="area central-area">
+              <!-- <div class="area-list">
+                <span class="area-city-name">臺中市</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">彰化縣</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">南投縣</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">雲林縣</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">嘉義市</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">嘉義縣</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div> -->
+            </div>
+          </div>
+
+          <div class="area-container">
+            <h3 class="area-part">南部</h3>
+            <div class="area south-area">
+              <!-- <div class="area-list">
+                <span class="area-city-name">臺南市</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">高雄市</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">屏東縣</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div> -->
+            </div>
+          </div>
+
+          <div class="area-container">
+            <h3 class="area-part">東部</h3>
+            <div class="area east-area">
+              <!-- <div class="area-list">
+                <span class="area-city-name">宜蘭縣</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">花蓮縣</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div>
+              <div class="area-list">
+                <span class="area-city-name">臺東縣</span>
+                <span class="area-temp-text">25&deg;C</span>
+                <img
+                  src="https://img.icons8.com/cotton/36/000000/sun--v2.png"
+                />
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
