@@ -207,7 +207,7 @@ const createAreaWeatherObject = function (data, area) {
 // 獲取城市目前天氣資訊
 export const getJSON = async function (cityName) {
   try {
-    const res = await fetch(WEATHERURL);
+    const res = await fetch(WEATHERURL); // fetch(中央氣象局目前天氣)
 
     const data = await res.json();
 
@@ -225,7 +225,7 @@ export const getJSON = async function (cityName) {
 // 獲取城市小時天氣資訊
 export const getHourJSON = async function (cityName) {
   try {
-    const res = await fetch(HOURWEATHERURL);
+    const res = await fetch(HOURWEATHERURL); // fetch(中央氣象局小時天氣)
 
     const data = await res.json();
 
@@ -242,19 +242,19 @@ export const getHourJSON = async function (cityName) {
 // 獲取各地區天氣資訊
 export const getAreaJSON = async function () {
   try {
-    let res = await fetch(NORTHURL);
+    let res = await fetch(NORTHURL); // fetch(中央氣象局北部天氣)
     const northData = await res.json();
     createAreaWeatherObject(northData.records.location, "north");
 
-    res = await fetch(CENTRALURL);
+    res = await fetch(CENTRALURL); // fetch(中央氣象局中部天氣)
     const centralData = await res.json();
     createAreaWeatherObject(centralData.records.location, "central");
 
-    res = await fetch(SOUTHURL);
+    res = await fetch(SOUTHURL); // fetch(中央氣象局南部天氣)
     const southData = await res.json();
     createAreaWeatherObject(southData.records.location, "south");
 
-    res = await fetch(EASTURL);
+    res = await fetch(EASTURL); // fetch(中央氣象局東部天氣)
     const eastData = await res.json();
     createAreaWeatherObject(eastData.records.location, "east");
   } catch (err) {
